@@ -1,26 +1,83 @@
 @import "tailwindcss";
 
 :root {
+  /* Light mode defaults (optional, but good to have) */
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand Colors */
+  --color-brand-primary: #6366f1;
+  /* Indigo 500 */
+  --color-brand-secondary: #a855f7;
+  /* Purple 500 */
+  --color-brand-accent: #14b8a6;
+  /* Teal 500 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #050505;
+    /* Deep black/gray */
+    --foreground: #ededed;
+
+    /* Dark mode specific adjustments if needed */
+    --color-surface: #0a0a0a;
+    --color-surface-highlight: #171717;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--color-surface);
+  --color-surface-highlight: var(--color-surface-highlight);
+
+  --color-primary: var(--color-brand-primary);
+  --color-secondary: var(--color-brand-secondary);
+  --color-accent: var(--color-brand-accent);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 8s ease-in-out infinite;
 }
