@@ -1,5 +1,10 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import dynamic from "next/dynamic";
+
+// Dynamically import Scene3D to avoid SSR issues with Three.js
+const Scene3D = dynamic(() => import("./Scene3D"), { ssr: false });
 
 export default function Hero() {
     return (
@@ -39,16 +44,10 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/40 to-brand-secondary/40 rounded-full blur-3xl animate-pulse-slow"></div>
             </div>
 
-            {/* Hero Image (Brain) */}
-            <div className="mt-16 relative z-10 flex justify-center">
-                <div className="relative w-full max-w-lg aspect-square animate-float">
-                    <Image
-                        src="/hero-brain.png"
-                        alt="Glowing abstract brain"
-                        fill
-                        className="object-contain drop-shadow-2xl"
-                        priority
-                    />
+            {/* Hero Image (Brain 3D) */}
+            <div className="mt-16 relative z-10 flex justify-center h-[500px] w-full">
+                <div className="relative w-full max-w-3xl h-full">
+                    <Scene3D />
                 </div>
             </div>
         </section>
